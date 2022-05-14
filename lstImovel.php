@@ -1,6 +1,6 @@
 <?php
    include 'conexao.php';
-   $pdo = Conexao::conectar(); 
+   $pdo = conexao::conectar(); 
    $sql = "select * from imovel order by rua;";
    $lstImovel = $pdo->query($sql); 
 ?>
