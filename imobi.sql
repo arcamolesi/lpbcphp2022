@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Maio-2022 às 01:14
+-- Tempo de geração: 18-Maio-2022 às 01:46
 -- Versão do servidor: 10.4.13-MariaDB
 -- versão do PHP: 7.4.8
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `imobi`
 --
+CREATE DATABASE IF NOT EXISTS `imobi` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `imobi`;
 
 -- --------------------------------------------------------
 
@@ -27,13 +29,15 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `imovel`
 --
 
-CREATE TABLE `imovel` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `imovel`;
+CREATE TABLE IF NOT EXISTS `imovel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `rua` varchar(35) NOT NULL,
   `bairro` varchar(25) NOT NULL,
   `cidade` varchar(25) NOT NULL,
-  `status` varchar(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` varchar(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `imovel`
@@ -43,7 +47,9 @@ INSERT INTO `imovel` (`id`, `rua`, `bairro`, `cidade`, `status`) VALUES
 (1, 'Rua João Ramalho, 1585', 'Tenis Clube', 'Assis', 'L'),
 (2, 'Rua do Lago', 'Aguas Claras', 'Assis', 'L'),
 (3, 'Rua Candido Mota, 1234', 'FEMA', 'Assis', 'L'),
-(4, 'Rua XV de Novembro, 1353', 'Centro', 'Assis', 'L');
+(4, 'Rua XV de Novembro, 1353', 'Centro', 'Assis', 'L'),
+(5, 'Rua FEMA, 12345', 'Centro', '123432333', 'L'),
+(6, 'Rua do IMESA, sn', 'Rodrigues', 'Assis', 'O');
 
 -- --------------------------------------------------------
 
@@ -51,12 +57,16 @@ INSERT INTO `imovel` (`id`, `rua`, `bairro`, `cidade`, `status`) VALUES
 -- Estrutura da tabela `locacao`
 --
 
-CREATE TABLE `locacao` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `locacao`;
+CREATE TABLE IF NOT EXISTS `locacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `imovel` int(11) NOT NULL,
   `locador` int(11) NOT NULL,
   `data` date NOT NULL,
-  `valor` float NOT NULL
+  `valor` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locacao_imovel` (`imovel`),
+  KEY `locacao_locador` (`locador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,14 +75,17 @@ CREATE TABLE `locacao` (
 -- Estrutura da tabela `locador`
 --
 
-CREATE TABLE `locador` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `locador`;
+CREATE TABLE IF NOT EXISTS `locador` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(35) NOT NULL,
   `cidade` varchar(25) NOT NULL,
   `estado` varchar(2) NOT NULL,
   `idade` int(11) NOT NULL,
   `salario` float NOT NULL,
-  `profissao` int(11) NOT NULL
+  `profissao` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locador_profissao` (`profissao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -81,10 +94,12 @@ CREATE TABLE `locador` (
 -- Estrutura da tabela `profissao`
 --
 
-CREATE TABLE `profissao` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `profissao`;
+CREATE TABLE IF NOT EXISTS `profissao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(35) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `profissao`
@@ -95,65 +110,6 @@ INSERT INTO `profissao` (`id`, `descricao`) VALUES
 (2, 'Pro'),
 (3, 'Consultor'),
 (4, 'Analista');
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `imovel`
---
-ALTER TABLE `imovel`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices para tabela `locacao`
---
-ALTER TABLE `locacao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `locacao_imovel` (`imovel`),
-  ADD KEY `locacao_locador` (`locador`);
-
---
--- Índices para tabela `locador`
---
-ALTER TABLE `locador`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `locador_profissao` (`profissao`);
-
---
--- Índices para tabela `profissao`
---
-ALTER TABLE `profissao`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `imovel`
---
-ALTER TABLE `imovel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `locacao`
---
-ALTER TABLE `locacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `locador`
---
-ALTER TABLE `locador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `profissao`
---
-ALTER TABLE `profissao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas

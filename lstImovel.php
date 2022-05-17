@@ -18,13 +18,19 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-   
-    <title>Listar Imóveis</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <title>Listar Imóveis</title>
 
 </head>
 <body>
-    <h1>Listar Imóveis</h1>
+    <h1>Listar Imóveis 
+    <a class="btn-floating btn-large waves-effect waves-light green"
+        onclick="JavaScript:location.href='frmInsImovel.php'">
+        <i class="material-icons">add</i>
+    </a>
+
+    </h1>
     <table class="striped">
         <tr>
              <th>ID</th>

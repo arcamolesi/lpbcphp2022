@@ -21,22 +21,22 @@
             <h1>Inserir Novo Imóvel</h1>
         </div>
         <div class="row">
-            <form action="insImovel.php" method="post" id="frmInsImov" name="frmInsImov" class="col s12">
+            <form action="insImovel.php" method="POST" id="frmInsImov" name="frmInsImov" class="col s12">
                 <div class="input-field col s8">
                     <label for="lblRua" class="black-text bold">Informe a Rua ou Avenida:</label>
-                    <input id="txt_rua" type="text">
+                    <input id="txt_rua"  name="txt_Rua" type="text">
                 </div>
                 <div class="input-field col s8">
                     <label for="lblBairro" class="black-text bold">Informe o Bairro:</label>
-                    <input id="txt_bairro" type="text">
+                <input id="txt_bairro" name = "txt_Bairro" type="text">
                 </div>
                 <div class="input-field col s8">
                     <label for="lblCidade" class="black-text bold">Informe a Cidade:</label>
-                    <input id="txt_cidade" type="text">
+                    <input id="txt_cidade" name ="txt_Cidade" type="text">
                 </div>
                 <div class="input-field col s8">
                     <label for="lblStatus" class="black-text bold">Informe a Situação (Status):</label>
-                    <input id="txt_status" type="text">
+                    <input id="txt_status" name="txt_Status" type="text">
                 </div>
                 <div class="grey darken-2 center col s12">
                    <br/>
