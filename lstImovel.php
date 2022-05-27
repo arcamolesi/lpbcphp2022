@@ -3,6 +3,7 @@
    $pdo = Conexao::conectar(); 
    $sql = "select * from imovel order by rua;";
    $lstImovel = $pdo->query($sql); 
+   Conexao::desconectar(); 
 ?>
 
 <!DOCTYPE html>
