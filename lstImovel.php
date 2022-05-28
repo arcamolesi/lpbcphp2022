@@ -8,11 +8,12 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -24,42 +25,63 @@
     <title>Listar Imóveis</title>
 
 </head>
+
 <body>
-    <h1>Listar Imóveis 
-    <a class="btn-floating btn-large waves-effect waves-light green"
-        onclick="JavaScript:location.href='frmInsImovel.php'">
-        <i class="material-icons">add</i>
-    </a>
+    <div class="container ">
+        <h1 class="light-green lighten-4">Listar Imóveis</h1>
+        <table class="striped">
+            <tr>
+                <th>ID</th>
+                <th>RUA</th>
+                <th>BAIRRO</th>
+                <th>CIDADE</th>
+                <th>STATUS</th>
+                <th class="center">FUNÇÕES</th>
+                <th>
+                    <a class="btn-floating btn-small waves-effect waves-light green"
+                        onclick="JavaScript:location.href='frmInsImovel.php'">
+                        <i class="material-icons">add</i>
+                    </a>
+                </th>
+            </tr>
 
-    </h1>
-    <table class="striped">
-        <tr>
-             <th>ID</th>
-             <th>RUA</th>
-             <th>BAIRRO</th>
-             <th>CIDADE</th>
-             <th>STATUS</th>
-             <th>Funcoes</th>
-        </tr>
-
-        <?php 
+            <?php 
            foreach($lstImovel as $imovel){
-        ?> 
-                <tr>
-                    <td><?php echo $imovel['id']?></td>
-                    <td><?php echo $imovel['rua']?></td>
-                    <td><?php echo $imovel['bairro']?></td>
-                    <td><?php echo $imovel['cidade']?></td>
-                    <td><?php echo $imovel['status']?></td>
-                    <td>
-                    <a class="btn-floating btn-small waves-effect waves-light orange"
-                        onclick="JavaScript:location.href='frmEdtImovel.php?id=' + 
+        ?>
+            <tr>
+                <td><?php echo $imovel['id']?></td>
+                <td><?php echo $imovel['rua']?></td>
+                <td><?php echo $imovel['bairro']?></td>
+                <td><?php echo $imovel['cidade']?></td>
+                <td><?php echo $imovel['status']?></td>
+                <td class="center">
+                    <a class="btn-floating btn-small waves-effect waves-light orange" onclick="JavaScript:location.href='frmEdtImovel.php?id=' + 
                            <?php echo $imovel['id'];?>">
                         <i class="material-icons">edit</i>
                     </a>
-                    </td> 
-                </tr>
-        <?php } ?> 
-    </table>
+                    <a class="btn-floating btn-small waves-effect waves-light red"
+                        onclick="JavaScript:remover(<?php echo $imovel['id'];?>)">
+                        <i class="material-icons">delete</i>
+                    </a>
+                    <a class="btn-floating btn-small waves-effect waves-light light-blue darken-3" onclick="JavaScript:location.href='frmDetImovel.php?id=' + 
+                           <?php echo $imovel['id'];?>">
+                        <i class="material-icons">info</i>
+                    </a>
+
+                </td>
+                <td></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
 </body>
+
 </html>
+
+<script>
+function remover(id) {
+    if (confirm('Excluir o imóvel ' + id + '?')) {
+        location.href = 'remImovel.php?id=' + id;
+    }
+}
+</script>
